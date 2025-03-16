@@ -1,6 +1,6 @@
 #include "minitalk.h"
 
-void print_binary(char *str)
+void send_string(char *str)
 {
 	int i = 0;
 	while (str[i])
@@ -8,18 +8,19 @@ void print_binary(char *str)
 		int j = 7;
 		while (j >= 0)
 		{
-			printf ("%d", (str[i] >> j) & 1);
+			if (1 & (str[i] >> j))
+				kill(pid , siguser1);
+			else
+				kill(pid , siguser2);
 			j--;
 		}
-		printf (" ");
 		i++;
 	}
-	printf ("\n");
 }
 
 int main (int ac, char **av)
 {
-	if (ac == 2)
+	if (ac == 3)
 	{
 		print_binary(av[1]);
 	}

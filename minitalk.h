@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 18:16:48 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/16 18:31:45 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/16 22:25:14 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "ft_printf/ft_printf.h"
 #include <stdio.h>
+#include <signal.h>
 
 void print_binary(char *str);
 
