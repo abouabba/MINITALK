@@ -12,29 +12,41 @@
 
 #include "minitalk.h"
 
-void handler(int sig)
+void	send_char(int pid, char c)
 {
-	if (sig == SIGUSR1)	
-		printf ("abouabba\n");
-	else
-		exit(0);
+    int	bit;
+
+    bit = 7;
+    while (bit >= 0)
+    {
+        if (c & (1 << bit))
+            kill(pid, SIGUSR1);
+        else
+            kill(pid, SIGUSR2);
+        usleep(600);
+        bit--;
+    }
 }
 
-int main()
+int main(int ac, char **av)
 {
-	int	pid;
-	
-	struct sigaction sa;
-	sa.sa_handler = handler;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	
-	pid = getpid();
-	printf("%d\n", pid);
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
-
-	while(1)
-		pause();
-	return (0);
+    if (ac != 3)
+    {
+        printf("Usage: ./client [PID] [string]\n");
+        return (1);
+    }
+    int pid = atoi(av[1]);
+    if (pid <= 0)
+    {
+        printf("Invalid PID\n");
+        return (1);
+    }
+    int i = 0;
+    while (av[2][i])
+    {
+        send_char(pid, av[2][i]);
+        i++;
+    }
+    send_char(pid, '\0');
+    return (0);
 }

@@ -13,12 +13,12 @@
 # ifndef MINITALK_H
 # define MINITALK_H
 
-#include "ft_printf/ft_printf.h"
+// #include "ft_printf/ft_printf.h"
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 
-void print_binary(char *str);
+
 
 # endif
