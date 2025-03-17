@@ -1,28 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/16 23:51:49 by abouabba          #+#    #+#             */
+/*   Updated: 2025/03/17 03:07:53 by abouabba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
-void send_string(char *str)
+void handler(int sig)
 {
-	int i = 0;
-	while (str[i])
-	{
-		int j = 7;
-		while (j >= 0)
-		{
-			if (1 & (str[i] >> j))
-				kill(pid , siguser1);
-			else
-				kill(pid , siguser2);
-			j--;
-		}
-		i++;
-	}
+	if (sig == SIGUSR1)	
+		printf ("abouabba\n");
+	else
+		exit(0);
 }
 
-int main (int ac, char **av)
+int main()
 {
-	if (ac == 3)
-	{
-		print_binary(av[1]);
-	}
+	int	pid;
+	
+	struct sigaction sa;
+	sa.sa_handler = handler;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	
+	pid = getpid();
+	printf("%d\n", pid);
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
+
+	while(1)
+		pause();
 	return (0);
 }

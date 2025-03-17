@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 18:16:48 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/16 22:25:14 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/17 01:00:26 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define MINITALK_H
 
 #include "ft_printf/ft_printf.h"
-#include <stdio.h>
 #include <signal.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 void print_binary(char *str);
 
