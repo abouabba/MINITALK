@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:51:23 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/18 13:47:36 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:47:00 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ void	signal_handler(int sig, siginfo_t *siginfo, void *context)
 	bit++;
 	if (bit == 8)
 	{
-		if (c == '\0')
-			write(1, "\n", 1);
-		else
-			write(1, &c, 1);
+		write(1, &c, 1);
 		bit = 0;
 		c = 0;
 	}
@@ -48,7 +45,6 @@ int	main(void)
 	write (1, "\n", 1);
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = signal_handler;
-	sigemptyset(&sa.sa_mask);
 	if (-1 == sigaction(SIGUSR1, &sa, NULL))
 		print_error("Error: sigaction failed!");
 	if (-1 == sigaction(SIGUSR2, &sa, NULL))

@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:51:49 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/18 13:33:51 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:48:19 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,15 @@ void	send_char(int pid, char c)
 	while (bit >= 0)
 	{
 		if (c & (1 << bit))
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				print_error("Error in kill\n");
+		}
 		else
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				print_error("Error in kill\n");
+		}
 		usleep(200);
 		usleep(200);
 		bit--;
@@ -51,15 +57,17 @@ int	main(int ac, char **av)
 	i = 0;
 	if (ac != 3)
 	{
-		printf("Usage: ./client [PID] [string]\n");
+		print_error("Usage: ./client [PID] [string]\n");
 		return (1);
 	}
-	if (!validation_pid(av[1]) || av[1][i] == '0')
+	if (!validation_pid(av[1]))
 	{
-		printf("incorecte PID\n");
+		print_error("Invalid PID\n");
 		return (1);
 	}
 	pid = ft_atoi(av[1]);
+	if (pid == -1 || pid == 0)
+		print_error("Invalid PID!\n");
 	while (av[2][i])
 	{
 		send_char(pid, av[2][i]);

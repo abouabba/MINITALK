@@ -2,8 +2,8 @@ NAME_S = server
 NAME_C = client
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRC_S = server.c utils.c
-SRC_C = client.c utils.c
+SRC_S = mandatory/server.c mandatory/utils.c
+SRC_C = mandatory/client.c mandatory/utils.c
 
 all: $(NAME_S) $(NAME_C)
 
@@ -16,6 +16,6 @@ $(NAME_C): $(SRC_C)
 clean:
 	rm -f $(NAME_S) $(NAME_C)
 
-fclean: clean
+fclean: clean $(NAME_C) $(NAME_S)
 
 re: fclean all

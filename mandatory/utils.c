@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:27:51 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/18 13:49:28 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:51:12 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,24 @@ void	ft_putnbr(int n)
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	n;
+	int		i;
+	long	n;
 
 	i = 0;
 	n = 0;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		n = n * 10 + (str[i] - '0');
+		if (n > 2147483647)
+			return (-1);
 		i++;
 	}
-	return (n);
+	if (n >= 1)
+		return (n);
+	return (-1);
 }
 
-void	print_error(char *s)
+int	print_error(char *s)
 {
 	int	i;
 
@@ -59,4 +63,5 @@ void	print_error(char *s)
 		write (2, &s[i], 1);
 		i++;
 	}
+	exit(1);
 }
