@@ -48,11 +48,32 @@ void	send_char(int pid, char c)
 		bit--;
 	}
 }
+void	ack_handler(int sig)
+{
+	(void)sig;
+}
+
+int	get_utf8_size(unsigned char c)
+{
+	if ((c & 0x80) == 0)
+		return (1);
+	if ((c & 0xE0) == 0xC0)
+		return (2);
+	if ((c & 0xF0) == 0xE0)
+		return (3);
+	if ((c & 0xF8) == 0xF0)
+		return (4);
+	return (-1);
+}
 
 int	main(int ac, char **av)
 {
 	int	i;
 	int	pid;
+	unsigned char	*c;
+	int	size;
+	int	j;
+	struct sigaction	sa;
 
 	i = 0;
 	if (ac != 3)
@@ -68,10 +89,24 @@ int	main(int ac, char **av)
 	pid = ft_atoi(av[1]);
 	if (pid == -1 || pid == 0)
 		print_error("Invalid PID!\n");
+	sa.sa_flags = 0;
+	sa.sa_handler = ack_handler;
+	if (sigaction(SIGUSR1, &sa, NULL) == -1)
+		print_error("Error: sigaction failed!");
+	i = 0;
 	while (av[2][i])
 	{
-		send_char(pid, av[2][i]);
-		i++;
+		c = (unsigned char *)&av[2][i];
+		size = get_utf8_size(*c);
+		if (size == -1)
+			print_error("Invalid character\n");
+		j = 0;
+		while (j < size)
+		{
+			send_char(pid, c[j]);
+			j++;
+		}
+		i += size;
 	}
 	send_char(pid, '\0');
 	return (0);
