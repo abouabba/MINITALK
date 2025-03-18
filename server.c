@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:51:23 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/18 12:10:43 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/18 13:47:36 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,17 @@ int	main(void)
 {
 	struct sigaction	sa;
 
-	printf("Server PID: %d\n", getpid());
-
+	ft_putstr("Server PID : ");
+	ft_putnbr(getpid());
+	write (1, "\n", 1);
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = signal_handler;
 	sigemptyset(&sa.sa_mask);
-
 	if (-1 == sigaction(SIGUSR1, &sa, NULL))
-		printf("Error: sigaction failed!\n");
+		print_error("Error: sigaction failed!");
 	if (-1 == sigaction(SIGUSR2, &sa, NULL))
-		printf("Error: sigaction failed!\n");
-
+		print_error("Error: sigaction failed!");
 	while (1)
 		pause();
-
 	return (0);
 }
