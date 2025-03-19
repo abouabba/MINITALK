@@ -6,13 +6,13 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:51:49 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/19 17:17:41 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:47:59 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-static pid_t 	g_pid;
+static pid_t	g_pid;
 
 int	validation_pid(char	*pid)
 {
@@ -45,8 +45,7 @@ void	send_char(int pid, char c)
 			if (kill(pid, SIGUSR2) == -1)
 				print_error("Error in kill\n");
 		}
-		usleep(200);
-		usleep(200);
+		usleep(300);
 		bit--;
 	}
 }
@@ -60,8 +59,8 @@ void	connection(int signum, siginfo_t *info, void *context)
 
 int	main(int ac, char **av)
 {
-	int	i;
-	struct sigaction client;
+	int					i;
+	struct sigaction	client;
 
 	if (ac != 3)
 		print_error("Usage: ./client [PID] [string]\n");

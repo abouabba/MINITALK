@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:51:23 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/19 15:19:08 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:58:21 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int	unicode_handler(unsigned char c)
 {
-	if (c < 0x80)
+	if (c < 0b10000000)
 		return (1);
-	else if ((c & 0xe0) == 0xc0)
+	else if ((c & 0b11100000) == 0b11000000)
 		return (2);
-	else if ((c & 0xf0) == 0xe0)
+	else if ((c & 0b11110000) == 0b11100000)
 		return (3);
-	else if ((c & 0xf8) == 0xf0)
+	else if ((c & 0b11111000) == 0b11110000)
 		return (4);
 	return (0);
 }
 
 int	check_bytes(int *counter, unsigned char *c, int pid, int *bit)
 {
-	static unsigned char unicode[8];
-	static int	bytes_num;
+	static unsigned char	unicode[8];
+	static int				bytes_num;
 
 	if (++(*counter) == 8)
 	{
@@ -68,7 +68,7 @@ void	signal_handler(int sig, siginfo_t *siginfo, void *context)
 		c = 0;
 	}
 	if (sig == SIGUSR1)
-		c |= (0x80 >> counter);
+		c |= (0b10000000 >> counter);
 	check_bytes(&counter, &c, pid, &bit);
 }
 
