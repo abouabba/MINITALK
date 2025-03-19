@@ -32,8 +32,8 @@ void	send_char(int pid, char c)
 {
 	int	bit;
 
-	bit = 7;
-	while (bit >= 0)
+	bit = 0;
+	while (bit < 8)
 	{
 		if (c & (1 << bit))
 		{
@@ -45,8 +45,9 @@ void	send_char(int pid, char c)
 			if (kill(pid, SIGUSR2) == -1)
 				print_error("Error in kill\n");
 		}
-		usleep(300);
-		bit--;
+		usleep(200);
+		usleep(200);
+		bit++;
 	}
 }
 

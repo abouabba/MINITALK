@@ -30,8 +30,8 @@ void	send_char(int pid, char c)
 {
 	int	bit;
 
-	bit = 7;
-	while (bit >= 0)
+	bit = 0;
+	while (bit < 8)
 	{
 		if (c & (1 << bit))
 		{
@@ -45,7 +45,7 @@ void	send_char(int pid, char c)
 		}
 		usleep(200);
 		usleep(200);
-		bit--;
+		bit++;
 	}
 }
 
@@ -56,15 +56,11 @@ int	main(int ac, char **av)
 
 	i = 0;
 	if (ac != 3)
-	{
 		print_error("Usage: ./client [PID] [string]\n");
-		return (1);
-	}
+
 	if (!validation_pid(av[1]))
-	{
 		print_error("Invalid PID\n");
-		return (1);
-	}
+
 	pid = ft_atoi(av[1]);
 	if (pid == -1 || pid == 0)
 		print_error("Invalid PID!\n");

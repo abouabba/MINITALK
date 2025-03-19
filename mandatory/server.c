@@ -26,7 +26,7 @@ void	signal_handler(int sig, siginfo_t *siginfo, void *context)
 		c = 0;
 	}
 	if (sig == SIGUSR1)
-		c |= (1 << (7 - bit));
+		c |= (1 << bit);
 	bit++;
 	if (bit == 8)
 	{
@@ -36,9 +36,12 @@ void	signal_handler(int sig, siginfo_t *siginfo, void *context)
 	}
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	struct sigaction	sa;
+	(void)av;
+	if (ac != 1)
+		print_error("Usage: ./server\n");
 
 	ft_putstr("Server PID : ");
 	ft_putnbr(getpid());

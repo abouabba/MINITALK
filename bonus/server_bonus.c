@@ -42,10 +42,7 @@ int	check_bytes(int *counter, unsigned char *c, int pid, int *bit)
 			*bit = 0;
 		}
 		if (*c == '\0')
-		{
 			kill(pid, SIGUSR1);
-			ft_putstr("\n");
-		}
 		*counter = 0;
 		*c = 0;
 	}
@@ -68,13 +65,15 @@ void	signal_handler(int sig, siginfo_t *siginfo, void *context)
 		c = 0;
 	}
 	if (sig == SIGUSR1)
-		c |= (0b10000000 >> counter);
+		c |= (1 << counter);
 	check_bytes(&counter, &c, pid, &bit);
 }
-
-int	main(void)
+int	main(int ac, char **av)
 {
 	struct sigaction	sa;
+	(void)av;
+	if (ac != 1)
+		print_error("Usage: ./server\n");
 
 	ft_putstr("Server PID : ");
 	ft_putnbr(getpid());
