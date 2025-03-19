@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:51:49 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/19 15:19:15 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:17:41 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ int	main(int ac, char **av)
 		print_error("Invalid PID!\n");
 	client.sa_sigaction = connection;
 	client.sa_flags = SA_SIGINFO;
-	sigaction(SIGUSR2, &client, 0);
-	sigaction(SIGUSR1, &client, 0);
+	if (sigaction(SIGUSR2, &client, 0) == -1)
+		print_error("sigaction filed");
+	if (sigaction(SIGUSR1, &client, 0) == -1)
+		print_error("sigaction filed");
 	i = 0;
 	while (av[2][i])
 	{
