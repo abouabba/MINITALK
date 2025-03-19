@@ -12,6 +12,19 @@
 
 #include "minitalk_bonus.h"
 
+int	unicode_handler(unsigned char c)
+{
+	if (c < 0x80)
+		return (1);
+	else if ((c & 0xe0) == 0xc0)
+		return (2);
+	else if ((c & 0xf0) == 0xe0)
+		return (3);
+	else if ((c & 0xf8) == 0xf0)
+		return (4);
+	return (0);
+}
+
 void	signal_handler(int sig, siginfo_t *siginfo, void *context)
 {
 	static int				bit;
