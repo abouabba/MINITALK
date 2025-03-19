@@ -6,11 +6,13 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:51:49 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/19 03:12:00 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/19 03:18:56 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
+
+static pid_t 	g_pid;
 
 int	validation_pid(char	*pid)
 {
@@ -49,30 +51,35 @@ void	send_char(int pid, char c)
 	}
 }
 
+void	connection(int signum, siginfo_t *info, void *context)
+{
+	(void)context;
+	if (signum == SIGUSR2 && info->si_pid == g_pid)
+		printf("Done , all bytes received successfully");
+}
+
 int	main(int ac, char **av)
 {
 	int	i;
-	int	pid;
+	struct sigaction client;
 
-	i = 0;
 	if (ac != 3)
-	{
 		print_error("Usage: ./client [PID] [string]\n");
-		return (1);
-	}
 	if (!validation_pid(av[1]))
-	{
 		print_error("Invalid PID\n");
-		return (1);
-	}
-	pid = ft_atoi(av[1]);
-	if (pid == -1 || pid == 0)
+	g_pid = ft_atoi(av[1]);
+	if (g_pid == -1 || g_pid == 0)
 		print_error("Invalid PID!\n");
+	client.sa_sigaction = connection;
+	client.sa_flags = SA_SIGINFO;
+	sigaction(SIGUSR2, &client, 0);
+	sigaction(SIGUSR1, &client, 0);
+	i = 0;
 	while (av[2][i])
 	{
-		send_char(pid, av[2][i]);
+		send_char(g_pid, av[2][i]);
 		i++;
 	}
-	send_char(pid, '\0');
+	send_char(g_pid, '\0');
 	return (0);
 }
