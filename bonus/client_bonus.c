@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:51:49 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/19 03:18:56 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/19 15:19:15 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	send_char(int pid, char c)
 void	connection(int signum, siginfo_t *info, void *context)
 {
 	(void)context;
-	if (signum == SIGUSR2 && info->si_pid == g_pid)
-		printf("Done , all bytes received successfully");
+	if (signum == SIGUSR1 && info->si_pid == g_pid)
+		ft_putstr("Done , all bytes received successfully");
 }
 
 int	main(int ac, char **av)
