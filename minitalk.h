@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 18:16:48 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/18 15:50:54 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/20 01:54:44 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINITALK_H
 
 # include <signal.h>
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 

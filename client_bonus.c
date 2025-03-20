@@ -6,11 +6,11 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:51:49 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/19 17:47:59 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/20 01:30:49 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk_bonus.h"
+#include "minitalk.h"
 
 static pid_t	g_pid;
 

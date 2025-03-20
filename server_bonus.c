@@ -6,11 +6,11 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:51:23 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/20 00:16:55 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/20 01:42:34 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk_bonus.h"
+#include "minitalk.h"
 
 int	unicode_handler(unsigned char c)
 {

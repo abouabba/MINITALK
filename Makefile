@@ -1,42 +1,60 @@
-NAME_S = server
-
-NAME_C = client
-
-NAME_BONUS_S = server_bonus
-
-NAME_BONUS_C = client_bonus
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/02/28 12:01:58 by hkhairi           #+#    #+#              #
+#    Updated: 2025/03/20 01:31:17 by abouabba         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 CC = cc
-
 CFLAGS = -Wall -Wextra -Werror
+NAME_CLIENT = client
+NAME_SERVER = server
+NAME_CLIENT_BONUS = client_bonus
+NAME_SERVER_BONUS = server_bonus
+HEADER_FILE = minitalk.h
 
-SRC_S = mandatory/server.c mandatory/utils.c
+HELP_FILE = utile.c
+SRC_CLIENT = client.c
+SRC_SERVER = server.c
 
-SRC_C = mandatory/client.c mandatory/utils.c
+SRC_CLIENT_BONUS = client_bonus.c
+SRC_SERVER_BONUS = server_bonus.c
 
-SRC_BONUS_S = bonus/server_bonus.c bonus/utils_bonus.c
+OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
+OBJ_SERVER = $(SRC_SERVER:.c=.o)
+OBJ_HELP = $(HELP_FILE:.c=.o)
 
-SRC_BONUS_C = bonus/client_bonus.c bonus/utils_bonus.c
+OBJ_CLIENT_BONUS = $(SRC_CLIENT_BONUS:.c=.o)
+OBJ_SERVER_BONUS = $(SRC_SERVER_BONUS:.c=.o)
 
-all: $(NAME_S) $(NAME_C)
+all: client server
 
-bonus: $(NAME_BONUS_S) $(NAME_BONUS_C)
+client: $(OBJ_CLIENT) $(OBJ_HELP)
+	$(CC) $(CFLAGS) $(OBJ_CLIENT) $(OBJ_HELP) -o $(NAME_CLIENT)
 
-$(NAME_BONUS_S): $(SRC_BONUS_S)
-	$(CC) $(CFLAGS) $(SRC_BONUS_S) -o $(NAME_BONUS_S)
+server: $(OBJ_SERVER) $(OBJ_HELP)
+	$(CC) $(CFLAGS) $(OBJ_SERVER) $(OBJ_HELP) -o $(NAME_SERVER)
 
-$(NAME_BONUS_C): $(SRC_BONUS_C)
-	$(CC) $(CFLAGS) $(SRC_BONUS_C) -o $(NAME_BONUS_C)
+client_bonus: $(OBJ_CLIENT_BONUS) $(OBJ_HELP)
+	$(CC) $(CFLAGS) $(OBJ_CLIENT_BONUS) $(OBJ_HELP) -o $(NAME_CLIENT_BONUS)
 
-$(NAME_S): $(SRC_S)
-	$(CC) $(CFLAGS) $(SRC_S) -o $(NAME_S)
+server_bonus: $(OBJ_SERVER_BONUS) $(OBJ_HELP)
+	$(CC) $(CFLAGS) $(OBJ_SERVER_BONUS) $(OBJ_HELP) -o $(NAME_SERVER_BONUS)
 
-$(NAME_C): $(SRC_C)
-	$(CC) $(CFLAGS) $(SRC_C) -o $(NAME_C)
+bonus: client_bonus server_bonus
+
+%.o: %.c $(HEADER_FILE)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(NAME_S) $(NAME_C) $(NAME_BONUS_S) $(NAME_BONUS_C)
+	rm -f $(OBJ_CLIENT) $(OBJ_SERVER) $(OBJ_CLIENT_BONUS) $(OBJ_SERVER_BONUS) $(OBJ_HELP)
 
 fclean: clean
+	rm -f $(NAME_CLIENT) $(NAME_SERVER) $(NAME_CLIENT_BONUS) $(NAME_SERVER_BONUS)
 
 re: fclean all
