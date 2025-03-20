@@ -6,13 +6,13 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:42:56 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/20 09:42:57 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/20 13:59:45 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static pid_t	g_pid;
+pid_t	g_pid;
 
 int	validation_pid(char	*pid)
 {
@@ -55,7 +55,7 @@ void	connection(int signum, siginfo_t *info, void *context)
 {
 	(void)context;
 	if (signum == SIGUSR1 && info->si_pid == g_pid)
-		ft_putstr("Done , all bytes received successfully");
+		ft_putstr("Done , all bytes received successfully\n");
 }
 
 int	main(int ac, char **av)
@@ -73,9 +73,9 @@ int	main(int ac, char **av)
 	client.sa_sigaction = connection;
 	client.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR2, &client, 0) == -1)
-		print_error("sigaction filed");
+		print_error("sigaction failed");
 	if (sigaction(SIGUSR1, &client, 0) == -1)
-		print_error("sigaction filed");
+		print_error("sigaction failed");
 	i = 0;
 	while (av[2][i])
 	{

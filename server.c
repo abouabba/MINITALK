@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:42:22 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/20 09:42:23 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:05:05 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int ac, char **av)
 		print_error("Usage: ./server\n");
 	ft_putstr("Server PID : ");
 	ft_putnbr(getpid());
-	write (1, "\n", 1);
+	ft_putstr("\n");
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = signal_handler;
 	if (-1 == sigaction(SIGUSR1, &sa, NULL))
