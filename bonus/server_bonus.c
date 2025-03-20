@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:51:23 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/19 17:58:21 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/20 00:16:55 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,14 @@ void	signal_handler(int sig, siginfo_t *siginfo, void *context)
 		c |= (1 << counter);
 	check_bytes(&counter, &c, pid, &bit);
 }
+
 int	main(int ac, char **av)
 {
 	struct sigaction	sa;
+
 	(void)av;
 	if (ac != 1)
 		print_error("Usage: ./server\n");
-
 	ft_putstr("Server PID : ");
 	ft_putnbr(getpid());
 	ft_putstr("\n");

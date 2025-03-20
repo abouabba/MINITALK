@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:51:49 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/18 15:48:19 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/20 00:17:57 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ int	main(int ac, char **av)
 	i = 0;
 	if (ac != 3)
 		print_error("Usage: ./client [PID] [string]\n");
-
 	if (!validation_pid(av[1]))
 		print_error("Invalid PID\n");
-
 	pid = ft_atoi(av[1]);
 	if (pid == -1 || pid == 0)
 		print_error("Invalid PID!\n");
