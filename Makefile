@@ -6,7 +6,7 @@
 #    By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/20 09:41:55 by abouabba          #+#    #+#              #
-#    Updated: 2025/03/20 22:01:37 by abouabba         ###   ########.fr        #
+#    Updated: 2025/03/21 01:07:05 by abouabba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ bonus: client_bonus server_bonus
 
 %.o: %.c $(HEADER_FILE_BONUS)
 	$(CC) $(CFLAGS) -c $< -o $@
-	
+
 clean:
 	rm -f $(OBJ_CLIENT) $(OBJ_SERVER) $(OBJ_CLIENT_BONUS) $(OBJ_SERVER_BONUS) $(OBJ_HELP_BONUS) $(OBJ_HELP)
 

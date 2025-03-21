@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:42:32 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/20 21:50:27 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/21 01:13:13 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ int	main(int ac, char **av)
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = signal_handler;
 	if (-1 == sigaction(SIGUSR1, &sa, NULL))
-		print_error("Error: sigaction failed!");
+		print_error("Error: sigaction failed!\n");
 	if (-1 == sigaction(SIGUSR2, &sa, NULL))
-		print_error("Error: sigaction failed!");
+		print_error("Error: sigaction failed!\n");
 	while (1)
 		pause();
 	return (0);

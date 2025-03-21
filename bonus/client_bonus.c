@@ -6,7 +6,7 @@
 /*   By: abouabba <abouabba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:42:56 by abouabba          #+#    #+#             */
-/*   Updated: 2025/03/20 21:50:19 by abouabba         ###   ########.fr       */
+/*   Updated: 2025/03/21 01:12:43 by abouabba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	connection(int signum, siginfo_t *info, void *context)
 {
 	(void)context;
 	if (signum == SIGUSR1 && info->si_pid == g_pid)
-		ft_putstr("Done , all bytes received successfully");
+		ft_putstr("Done , all bytes received successfully\n");
 }
 
 int	main(int ac, char **av)
@@ -72,10 +72,10 @@ int	main(int ac, char **av)
 		print_error("Invalid PID!\n");
 	client.sa_sigaction = connection;
 	client.sa_flags = SA_SIGINFO;
-	if (sigaction(SIGUSR2, &client, 0) == -1)
-		print_error("sigaction filed");
-	if (sigaction(SIGUSR1, &client, 0) == -1)
-		print_error("sigaction filed");
+	if (sigaction(SIGUSR2, &client, NULL) == -1)
+		print_error("sigaction filed\n");
+	if (sigaction(SIGUSR1, &client, NULL) == -1)
+		print_error("sigaction filed\n");
 	i = 0;
 	while (av[2][i])
 	{
